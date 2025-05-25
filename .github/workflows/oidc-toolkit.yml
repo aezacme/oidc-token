@@ -22,27 +22,10 @@ jobs:
           const fs = require('fs');
           const path = require('path');
           let id_token = await coredemo.getIDToken('sts.amazonaws.com');
-          # let tokenPath = path.join(process.env.GITHUB_WORKSPACE, 'oidc-token.txt');
-          # fs.writeFileSync(tokenPath, id_token, 'utf-8');
+          let tokenPath = path.join(process.env.GITHUB_WORKSPACE, 'oidc-token.txt');
+          fs.writeFileSync(tokenPath, id_token, 'utf-8');
           coredemo.setOutput('token-path', tokenPath);
-          # const arrayToken = id_token.split('.');
-          # let tokenPayload = JSON.parse(atob(arrayToken[0]));
-          # console.log(tokenPayload);
-          # tokenPayload = JSON.parse(atob(arrayToken[1]));
-          # console.log(tokenPayload);
-          # coredemo.setOutput('id_token', id_token);
-    # - name: Decode Id Token
-    #   uses: actions/github-script@v7
-    #   with: 
-    #     script: |
-    #       console.log('TO READ')
-    #       const token = ${{ steps.idtoken.outputs.id_token }}
-    #       console.log('TOKEN READ')
-    #       const arrayToken = token.split('.');
-    #       console.log('ARRAY TOKEN', arrayToken)
-    #       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-    #       console.log(tokenPayload)
-    # - name: Read Token
-    #   run: |
-    #     echo "Token contents:"
-    #     cat oidc-token.txt
+    - name: Read Token
+      run: |
+        echo "Token contents:"
+        cat oidc-token.txt
