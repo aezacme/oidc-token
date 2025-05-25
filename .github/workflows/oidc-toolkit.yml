@@ -22,12 +22,11 @@ jobs:
           coredemo.setOutput('id_token', id_token)
     - name: Decode Id Token
       uses: actions/github-script@v7
-      env:
-        TOKEN: ${{steps.idtoken.outputs.id_token}}
       with: 
         script: |
-          const token = $TOKEN
+          const token = ${{ steps.idtoken.outputs.id_token }}
+          core.info('TOKEN READ')
           const arrayToken = token.split('.');
-          console.log(arrayToken)
+          console.log('ARRAY TOKEN', arrayToken)
           const tokenPayload = JSON.parse(atob(arrayToken[1]));
           core.info(tokenPayload)
