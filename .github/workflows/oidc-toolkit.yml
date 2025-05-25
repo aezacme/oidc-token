@@ -24,6 +24,7 @@ jobs:
       uses: actions/github-script@v7
       with: 
         script: |
+          coe.info('TO READ')
           const token = ${{ steps.idtoken.outputs.id_token }}
           core.info('TOKEN READ')
           const arrayToken = token.split('.');
