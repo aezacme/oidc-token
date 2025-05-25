@@ -21,10 +21,12 @@ jobs:
           let id_token = await coredemo.getIDToken()
           coredemo.setOutput('id_token', id_token)
     - name: Decode Id Token
-      shell: bash
       env:
-        ID_TOKEN: ${{steps.idtoken.outputs.id_token}}
-      run: |
-        const arrayToken = $ID_TOKEN.split('.');
-        const tokenPayload = JSON.parse(atob(arrayToken[1]));
-        core.info(tokenPayload)
+        TOKEN: ${{steps.idtoken.outputs.id_token}}
+      with: 
+        script: |
+          const token = $TOKEN
+          const arrayToken = token.split('.');
+          console.log(arrayToken)
+          const tokenPayload = JSON.parse(atob(arrayToken[1]));
+          core.info(tokenPayload)
