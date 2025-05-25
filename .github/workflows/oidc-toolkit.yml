@@ -21,10 +21,12 @@ jobs:
           const coredemo = require('@actions/core');
           let id_token = await coredemo.getIDToken();
           const arrayToken = id_token.split('.');
-          for (t in arrayToken) {
-            let tokenPayload = JSON.parse(atob(t));
-            console.log(t);
-          }          
+          let tokenPayload = JSON.parse(atob(arrayToken[0]));
+          console.log(tokenPayload);
+          tokenPayload = JSON.parse(atob(arrayToken[1]));
+          console.log(tokenPayload);
+          tokenPayload = JSON.parse(atob(arrayToken[2]));
+          console.log(tokenPayload);
           coredemo.setOutput('id_token', id_token);
     # - name: Decode Id Token
     #   uses: actions/github-script@v7
