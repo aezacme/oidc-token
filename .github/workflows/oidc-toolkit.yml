@@ -19,13 +19,11 @@ jobs:
         debug: true
         script: |
           const coredemo = require('@actions/core');
-          let id_token = await coredemo.getIDToken();
+          let id_token = await coredemo.getIDToken('sts.amazonaws.com');
           const arrayToken = id_token.split('.');
           let tokenPayload = JSON.parse(atob(arrayToken[0]));
           console.log(tokenPayload);
           tokenPayload = JSON.parse(atob(arrayToken[1]));
-          console.log(tokenPayload);
-          tokenPayload = JSON.parse(atob(arrayToken[2]));
           console.log(tokenPayload);
           coredemo.setOutput('id_token', id_token);
     # - name: Decode Id Token
