@@ -20,7 +20,7 @@ jobs:
         script: |
           const coredemo = require('@actions/core');
           const fs = require('fs');
-          const path = require(;path');
+          const path = require('path');
           let id_token = await coredemo.getIDToken('sts.amazonaws.com');
           let tokenPath = path.join(process.env.GITHUB_WORKSPACE, 'oidc-token.tx');
           fs.writeFileSync(tokenPath, id_token, 'utf-8');
