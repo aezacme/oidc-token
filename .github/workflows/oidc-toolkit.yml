@@ -25,7 +25,8 @@ jobs:
           let tokenPath = path.join(process.env.GITHUB_WORKSPACE, 'oidc-token.txt');
           fs.writeFileSync(tokenPath, id_token, 'utf-8');
           coredemo.setOutput('token-path', tokenPath);
-    - name: Read Token
-      run: |
-        echo "Token contents:"
-        cat oidc-token.txt
+    - name: Upload Token
+      uses: actions/upload-artifact@v4
+      with:
+        name: oidc-token
+        path: oidc-token.txt
